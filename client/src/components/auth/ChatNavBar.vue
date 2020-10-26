@@ -30,7 +30,6 @@ export default {
     }
   },
   created() {
-    console.log("got here");
     this.getUserDetails();
   }
 };

@@ -55,7 +55,7 @@ export default {
     getUserDetails() {
       let token = localStorage.getItem("user");
       let decoded = VueJwtDecode.decode(token);
-      console.log(decoded, "------------------");
+      console.log(decoded);
       this.user = decoded;
     },
     logUserOut() {

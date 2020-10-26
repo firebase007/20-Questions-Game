@@ -38,7 +38,6 @@
               v-model="register.email"
               required
             />
-            <!-- Password -->
             <input
               type="password"
               id="password"
@@ -49,7 +48,6 @@
             <p>
               Already have an account? Click
               <router-link to="/login">here</router-link> to sign in
-              <!-- Sign in button -->
               <center>
                 <button
                   class="btn btn-primary btn-block w-75 my-4"
@@ -91,11 +89,6 @@ export default {
       } catch (err) {
         let error = err.response;
         console.log(error);
-        // if (error.status == 409) {
-        //   console.log("Error", error, "error");
-        // } else {
-        //   console.log("Error", error, "error");
-        // }
       }
     }
   }

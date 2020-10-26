@@ -37,7 +37,7 @@
 <script>
 import getSocket from "../../helpers/socket";
 import VueJwtDecode from "vue-jwt-decode";
-// const socket = getSocket()
+
 
 export default {
   name: "Chat",
@@ -54,15 +54,13 @@ export default {
   components: {},
   created() {
     console.log(this.options, "state options");
-    // this.$store.dispatch('SET_ROOM', this.options.room)
     this.getUserDetails();
-    // this.joinRoom()
   },
   methods: {
     getUserDetails() {
       let token = localStorage.getItem("user");
       let decoded = VueJwtDecode.decode(token);
-      console.log(decoded, "------------------");
+      console.log(decoded, "-----------");
       this.user = decoded;
     },
 

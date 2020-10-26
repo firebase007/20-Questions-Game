@@ -9,8 +9,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 const base = axios.create({
-  baseURL: "http://localhost:3000/api/v1"
-});
+  baseURL: "http://localhost:3000/api/v1" // replace on production env
+}); 
 
 import store from "./store/index";
 

@@ -12,7 +12,6 @@
               >{{ msg.message }} :
               <span> {{ new Date() | moment("h:mm a") }} </span>
             </p>
-            <!-- <span>{{ msg.message }}</span> -->
           </div>
         </div>
       </div>
@@ -50,7 +49,6 @@ export default {
       message: "",
       messages: [],
       adminMessage: false,
-      // message: this.$store.getters.MESSAGE,
       room: this.$store.getters.ROOM
     };
   },
@@ -68,7 +66,7 @@ export default {
     getUserDetails() {
       let token = localStorage.getItem("user");
       let decoded = VueJwtDecode.decode(token);
-      console.log(decoded, "------------------");
+      console.log(decoded, "-----------");
       this.user = decoded;
     },
     //     joinRoom() {

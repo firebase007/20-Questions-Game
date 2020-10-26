@@ -22,7 +22,6 @@ export default {
 
   methods: {
     created() {
-      console.log("got here to initialize convo");
     }
   }
 };

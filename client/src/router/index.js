@@ -51,45 +51,22 @@ const router = new VueRouter({
 //base: process.env.VUE_APP_API_ROOT,
   routes
 });
-// let isFirstTransition = true;
-// router.afterEach(to => {
-//   console.log(to, 'opopopopopopomkimkikki')
-//   localStorage.setItem('redirectPath', to.name);
-// });
-
 
 const socket = getSocket()
 router.beforeEach((to, from, next) => {
-
-  // const lastRouteName = localStorage.getItem('redirectPath');
-
-  // console.log(lastRouteName, to.name,  'lastknowroute')
-
-  // const shouldRedirect = Boolean(
-  //   to.name === "/login" &&
-  //   lastRouteName 
-  //   && isFirstTransition
-  // );
-  // console.log(shouldRedirect, 'should EDIRECT ')
-  // if (shouldRedirect){
-  //   next({ name: lastRouteName });
-  // } 
-  // else {next();}
-  // isFirstTransition = false;
-// });
 
   if (to.name === from.name) {
     return next()
   }
   if (socket.io.readyState === 'open') {
     if (to.name) {
+      console.log(to.name)
       socket.emit('join', to.name)
     }
   }
   next()
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("user") == null) {
-      localStorage.setItem('redirectPath', '/chat')
       next({
         path: "/login"
       });

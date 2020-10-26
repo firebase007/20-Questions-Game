@@ -48,8 +48,7 @@
   </div>
 </template>
 <script>
-// import getSocket from '../../helpers/socket';
-// const socket = getSocket()
+
 
 export default {
   data() {
@@ -61,24 +60,13 @@ export default {
       connections: 0
     };
   },
-  // created(){
-  //   socket.on('connect', (data) => {
-  //     this.connect()
-  //     });
-  // },
+  
   methods: {
     async loginUser() {
       try {
-        //  const socket = getSocket()
-
-        // socket.emit('connections', (data) => {
-        // console.log(data, '-----d-ddd-dd')
-        //   this.connections = data;
-        //   localStorage.setItem('adminUser', data);
-        // });
-
+       
         let response = await this.$http.post("/auth/login", this.login);
-        console.log(response, "---------response");
+        console.log(response, "--------");
         let token = response.data.data.token;
 
         localStorage.setItem("user", token);

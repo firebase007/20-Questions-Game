@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Axios from "axios";
+// import Axios from "axios";
 
 Vue.use(Vuex);
 
@@ -53,11 +53,11 @@ export default new Vuex.Store({
   },
 
   actions: {
-    SET_CHAT: async (context, payload) => {
-      let { data } = await Axios.get("http://localhost:3000/chat");
-      console.log(data, payload);
-      context.commit("SET_CHAT", data);
-    },
+    // SET_CHAT: async (context, payload) => {
+      // let { data } = await Axios.get("http://localhost:3000/chat");
+      // console.log(data, payload);
+      // context.commit("SET_CHAT", data);
+    // },
     ADD_CHAT: (context, payload) => {
       context.commit("ADD_CHAT", payload);
     },

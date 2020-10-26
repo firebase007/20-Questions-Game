@@ -48,8 +48,8 @@
 </template>
 <script>
 import VueJwtDecode from "vue-jwt-decode";
-import getSocket from "../helpers/socket";
-const socket = getSocket();
+// import getSocket from "../helpers/socket";
+// const socket = getSocket();
 
 export default {
   data() {
@@ -64,21 +64,17 @@ export default {
     getUserDetails() {
       let token = localStorage.getItem("user");
       let decoded = VueJwtDecode.decode(token);
-      console.log(decoded, "------------------");
+      console.log(decoded)
       this.user = decoded;
     },
 
     submitGuess(e) {
       e.preventDefault();
-      console.log(this.user.email, "ooooooooppp");
-      console.log("here boo", this.submit.guess);
+      console.log(this.user.email, this.submit.guess);
       this.$store.dispatch("SET_GUESS", this.submit.guess);
-      // this.$store.dispatch("SET_USER", this.user);
-      // localStorage.setItem("admin-user", this.user.email)
       this.$router.push("/chat/player1");
-      socket.emit("create", "room1this");
+      // socket.emit("create", "room1this");
     },
-
     logUserOut() {
       localStorage.removeItem("user");
       this.$router.push("/login");
