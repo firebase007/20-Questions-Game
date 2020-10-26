@@ -1,61 +1,68 @@
 <template>
   <div class="container">
-      <b-card bg-variant="dark" header="Welcome to the 20 Questions Game" text-variant="white" class="text-center">
-          <b-card-text>Register to play!</b-card-text>
-    <div class="row">
-      <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
-        <form
-          class="text-center border border-primary p-5"
-          style="margin-top:70px;height:auto;padding-top:100px !important;"
-          @submit.prevent="registerUser"
-        >
-          <input
-            type="text"
-            id="firstName"
-            class="form-control mb-5"
-            placeholder="firstName"
-            v-model="register.firstName"
-            required
-          />
-          <input
-            type="text"
-            id="lastName"
-            class="form-control mb-5"
-            placeholder="lastName"
-            v-model="register.lastName"
-            required
-          />
-          <input
-            type="email"
-            id="email"
-            class="form-control mb-5"
-            placeholder="Email"
-            v-model="register.email"
-            required
-          />
-          <!-- Password -->
-          <input
-            type="password"
-            id="password"
-            class="form-control mb-5"
-            placeholder="Password"
-            v-model="register.password"
-          />
-          <p>
-            Already have an account? Click <router-link to="/login"
-              >here</router-link
-            > to sign in 
-            <!-- Sign in button -->
-            <center>
-              <button class="btn btn-primary btn-block w-75 my-4" type="submit">
-                Sign up
-              </button>
-            </center>
-          </p>
-        </form>
+    <b-card
+      bg-variant="dark"
+      header="Welcome to the 20 Questions Game"
+      text-variant="white"
+      class="text-center"
+    >
+      <b-card-text>Register to play!</b-card-text>
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
+          <form
+            class="text-center border border-primary p-5"
+            style="margin-top:70px;height:auto;padding-top:100px !important;"
+            @submit.prevent="registerUser"
+          >
+            <input
+              type="text"
+              id="firstName"
+              class="form-control mb-5"
+              placeholder="firstName"
+              v-model="register.firstName"
+              required
+            />
+            <input
+              type="text"
+              id="lastName"
+              class="form-control mb-5"
+              placeholder="lastName"
+              v-model="register.lastName"
+              required
+            />
+            <input
+              type="email"
+              id="email"
+              class="form-control mb-5"
+              placeholder="Email"
+              v-model="register.email"
+              required
+            />
+            <!-- Password -->
+            <input
+              type="password"
+              id="password"
+              class="form-control mb-5"
+              placeholder="Password"
+              v-model="register.password"
+            />
+            <p>
+              Already have an account? Click
+              <router-link to="/login">here</router-link> to sign in
+              <!-- Sign in button -->
+              <center>
+                <button
+                  class="btn btn-primary btn-block w-75 my-4"
+                  type="submit"
+                >
+                  Sign up
+                </button>
+              </center>
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
-     </b-card>
+    </b-card>
   </div>
 </template>
 <script>
@@ -83,7 +90,7 @@ export default {
         }
       } catch (err) {
         let error = err.response;
-        console.log(error)
+        console.log(error);
         // if (error.status == 409) {
         //   console.log("Error", error, "error");
         // } else {

@@ -48,7 +48,7 @@ export default {
       selected: "",
       options: [],
       adminMessage: true,
-      message: this.$store.getters.MESSAGE,
+      message: this.$store.getters.MESSAGE
     };
   },
   components: {},
@@ -73,30 +73,30 @@ export default {
         {
           options: this.options,
           user: this.user,
-          adminMessage: this.adminMessage,
+          adminMessage: this.adminMessage
         },
         "options"
       );
       this.$store.dispatch("SET_MESSAGE", {
         options: this.options,
-        adminMessage: this.adminMessage,
+        adminMessage: this.adminMessage
       });
       socket.emit("SEND_MESSAGE", {
         user: this.user.firstname,
         select: this.options,
-        adminMessage: this.adminMessage,
+        adminMessage: this.adminMessage
       });
       this.options = "";
-    },
+    }
   },
   mounted() {
     const socket = getSocket();
-    socket.on("MESSAGE", (data) => {
+    socket.on("MESSAGE", data => {
       console.log(data, data.room, "-----------jjjj1313");
       socket.emit("join", data.room);
       // localStorage.setItem("roomToJoin", data.room);
       this.options = [...this.options, data];
     });
-  },
+  }
 };
 </script>

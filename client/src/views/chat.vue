@@ -11,14 +11,13 @@
 </template>
 
 <script>
-import Chat from '../components/auth/chat'
+import Chat from "../components/auth/chat";
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Chat
   }
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>

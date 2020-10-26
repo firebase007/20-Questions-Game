@@ -14,30 +14,30 @@
 import VueJwtDecode from "vue-jwt-decode";
 
 export default {
-    data() {
+  data() {
     return {};
-  },   
- methods: {
+  },
+  methods: {
     getUserDetails() {
       let token = localStorage.getItem("user");
       let decoded = VueJwtDecode.decode(token);
-      console.log(decoded, '------------------')
+      console.log(decoded, "------------------");
       this.user = decoded;
     },
     logUserOut() {
       localStorage.removeItem("user");
       this.$router.push("/login");
-    },
-    },
-    created() {
-    console.log('got here')
-    this.getUserDetails();
+    }
   },
-}
+  created() {
+    console.log("got here");
+    this.getUserDetails();
+  }
+};
 </script>
 
 <style>
-  #chat-navbar {
-    margin-bottom: 15px;
-  }
+#chat-navbar {
+  margin-bottom: 15px;
+}
 </style>
