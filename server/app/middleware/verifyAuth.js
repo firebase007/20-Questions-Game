@@ -6,14 +6,6 @@ import Utils from '../helpers/utils'
 
 dotenv.config()
 
-/**
-   * Verify Token
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   * @returns {object|void} response object
-   */
-
 const authenticate = () => {
 	console.log('got here')
 	return (req, res, next) => {

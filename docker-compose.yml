@@ -15,7 +15,7 @@ services:
     build: 
       context: ./server
       dockerfile: Dockerfile
-    command: sh -c "npm run migrate-db && npm install && npm run start"
+    command: sh -c "npm run create-dev-tables && npm install && npm run start"
     ports:
       - 8001:3001
     working_dir: /home/app/server
@@ -30,7 +30,7 @@ services:
        - POSTGRES_USER=user
        - POSTGRES_DB=postgresdb
        - POSTGRES_PASSWORD=password
-       - POSTGRES_HOST_AUTH_METHOD=trust
+       - POSTGRES_HOST=
     volumes:
        - ./db/data/postgres:/var/lib/postgresql/data  
     ports:

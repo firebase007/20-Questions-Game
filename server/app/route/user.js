@@ -8,7 +8,7 @@ import {
 } from '../helpers/validation'
 
 import {
-  authenticate, decodeHeader,
+  decodeHeader,
  } from '../middleware/verifyAuth'
 
 const router = express.Router()

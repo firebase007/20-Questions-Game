@@ -61,12 +61,6 @@ io.use(async (socket, next) => {
 }).on('connection', (socket) => {
 	const userId = socket.user.id
 	console.log(userId, 'userId')
-	// socket.on('SEND_GUESS', (data) => {
-	// 	console.log(data, 'oololp')
-	// 	// console.log({ data, room: socket.rooms, id: userId }, 'data')
-	// 	// io.emit('GUESS', { data, room: socket.rooms, id: userId })
-	// 	// io.to(socket.rooms).emit('GUESS')
-	// })
 
 	console.log(`Socket ${socket.id} connected.`)
 
@@ -75,8 +69,6 @@ io.use(async (socket, next) => {
 	socket.on('join', (data) => {
 		console.log(data, 'room')
 		socket.join(data)
-		// rooms[userId] = data
-		// console.log(rooms)
 	})
 
 	socket.on('SEND_MESSAGE', (data) => {

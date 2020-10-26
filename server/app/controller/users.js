@@ -25,7 +25,7 @@ import {
    * Register New User
    * @param {object} req
    * @param {object} res
-   * @returns {object} reflection object
+   * @returns {object} object
    */
 const registerUser = async (req, res) => {
 	const {
