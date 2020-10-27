@@ -6,7 +6,7 @@
         <div class="card-body">
           <initializeConvo :name="this.user.firstname" />
 
-          <div class="messages" v-for="(msg, index) in messages" :key="index">
+          <div class="messages" v-for="msg in messages" :key="msg.message">
             <p>
               <span class="font-weight-bold">{{ msg.user }}: </span
               >{{ msg.message }} :
@@ -47,7 +47,7 @@ export default {
     return {
       user: "",
       message: "",
-      messages: [],
+      messages: this.$store.getters.MESSAGE,
       adminMessage: false,
       room: this.$store.getters.ROOM
     };
@@ -60,6 +60,7 @@ export default {
     console.log(this.message, "message00000000");
     console.log(this.messages, "room");
     this.getUserDetails();
+    this.messages= this.$store.getters.MESSAGE;
     //   this.joinRoom()
   },
   methods: {
@@ -78,9 +79,10 @@ export default {
       e.preventDefault();
       // const socket = getSocket()
       this.$store.dispatch("SET_MESSAGE", {
-        options: this.options,
+        messages: this.messages,
         adminMessage: this.adminMessage
       });
+      console.log(this.messages, "dtate-medssd")
       socket.emit("SEND_MESSAGE", {
         user: this.user.firstname,
         message: this.message,
@@ -100,7 +102,12 @@ export default {
         this.messages.length,
         this.messages
       );
-      this.messages = [...this.messages, data];
+      console.log(data.room, 'room')
+      // localStorage.getItem("roomToJoin")
+      this.messages = [...this.messages, data]
+      // this.messages.push(data)
+      this.messages= this.$store.getters.MESSAGE;
+    
     });
   }
 };

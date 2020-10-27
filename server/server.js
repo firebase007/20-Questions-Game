@@ -69,6 +69,7 @@ io.use(async (socket, next) => {
 	socket.on('join', (data) => {
 		console.log(data, 'room')
 		socket.join(data)
+		// io.sockets.in(data).emit('MESSAGE', data)
 	})
 
 	socket.on('SEND_MESSAGE', (data) => {

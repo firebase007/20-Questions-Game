@@ -11,6 +11,8 @@ services:
     volumes:
       - ./client:/home/app/client
       - /home/app/client/node_modules
+    depends_on:
+      - server
   server:
     build: 
       context: ./server
