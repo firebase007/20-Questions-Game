@@ -4,12 +4,13 @@
     <div class="card mt-3">
       <div class="card-body">
         <div class="card-body">
+          <span> <b>Guess Count: </b>{{ countdown }} </span>
           <initializeConvo :name="this.user.firstname" />
 
           <div class="messages" v-for="msg in messages" :key="msg.message">
             <p>
-              <span class="font-weight-bold">{{ msg.user }}: </span
-              >{{ msg.message }} :
+              <span class="font-weight-bold">{{ msg.data.user }}: </span
+              >{{ msg.data.message }} :
               <span> {{ new Date() | moment("h:mm a") }} </span>
             </p>
           </div>
@@ -27,7 +28,9 @@
             />
           </div>
 
-          <button type="submit" class="btn btn-success">Send</button>
+          <button type="submit" :disabled="clickable" class="btn btn-success">
+            Send
+          </button>
         </form>
       </div>
     </div>
@@ -49,6 +52,7 @@ export default {
       message: "",
       messages: this.$store.getters.MESSAGE,
       adminMessage: false,
+      countdown: Number(20),
       room: this.$store.getters.ROOM
     };
   },
@@ -60,8 +64,7 @@ export default {
     console.log(this.message, "message00000000");
     console.log(this.messages, "room");
     this.getUserDetails();
-    this.messages= this.$store.getters.MESSAGE;
-    //   this.joinRoom()
+    this.messages = this.$store.getters.MESSAGE;
   },
   methods: {
     getUserDetails() {
@@ -70,19 +73,23 @@ export default {
       console.log(decoded, "-----------");
       this.user = decoded;
     },
-    //     joinRoom() {
-    //     const room = this.room
-    //     console.log(room, 'testrttr')
-    //     socket.emit('join', {room: room});
-    // },
+    checkAdminResponse() {
+      if (this.messages.data.message === "Yes") {
+        alert(
+          `Hey ${this.user.firstname}, the game has ended as you have made the correct guess...!!!CONGRATULATIONS!!!`
+        );
+        return true;
+      }
+      return false;
+    },
+
     sendMessage(e) {
       e.preventDefault();
-      // const socket = getSocket()
       this.$store.dispatch("SET_MESSAGE", {
         messages: this.messages,
         adminMessage: this.adminMessage
       });
-      console.log(this.messages, "dtate-medssd")
+      console.log(this.messages, "message-button-click");
       socket.emit("SEND_MESSAGE", {
         user: this.user.firstname,
         message: this.message,
@@ -90,6 +97,7 @@ export default {
         created: Date.now()
       });
       this.message = "";
+      this.countdown--;
     }
   },
   mounted() {
@@ -97,18 +105,25 @@ export default {
     socket.on("MESSAGE", data => {
       console.log(
         data,
-        "222",
+        "222 on chat side-player 2",
         [...this.messages, data],
         this.messages.length,
         this.messages
       );
-      console.log(data.room, 'room')
-      // localStorage.getItem("roomToJoin")
-      this.messages = [...this.messages, data]
-      // this.messages.push(data)
-      this.messages= this.$store.getters.MESSAGE;
-    
+      this.messages = [...this.messages, data];
     });
+  },
+  computed: {
+    clickable() {
+      // if something
+      if (this.countdown === 0) {
+        alert(
+          `Hey ${this.user.firstname}, the game has ended and you have not made the correct guess!!`
+        );
+        return true;
+      }
+      return false;
+    }
   }
 };
 </script>

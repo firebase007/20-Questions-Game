@@ -48,8 +48,6 @@
   </div>
 </template>
 <script>
-
-
 export default {
   data() {
     return {
@@ -60,11 +58,10 @@ export default {
       connections: 0
     };
   },
-  
+
   methods: {
     async loginUser() {
       try {
-       
         let response = await this.$http.post("/auth/login", this.login);
         console.log(response, "--------");
         let token = response.data.data.token;

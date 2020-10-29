@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/home.vue";
 import Chat from "../views/chat.vue";
 import ChatAdmin from "../views/chatAdmin.vue";
-import getSocket from '../helpers/socket';
+// import getSocket from '../helpers/socket';
 
 Vue.use(VueRouter);
 
@@ -52,18 +52,18 @@ const router = new VueRouter({
   routes
 });
 
-const socket = getSocket()
+// const socket = getSocket()
 router.beforeEach((to, from, next) => {
 
   if (to.name === from.name) {
     return next()
   }
-  if (socket.io.readyState === 'open') {
-    if (to.name) {
-      console.log(to.name)
-      socket.emit('join', to.name)
-    }
-  }
+  // if (socket.io.readyState === 'open') {
+  //   if (to.name) {
+  //     console.log(to.name)
+  //     socket.emit('join', to.name)
+  //   }
+  // }
   next()
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("user") == null) {

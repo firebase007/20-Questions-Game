@@ -6,20 +6,21 @@
           <div v-if="adminMessage">
             <div class="messages" v-for="(opts, index) in options" :key="index">
               <p>
-                <span class="font-weight-bold">{{ opts.user }} </span>
-                {{ opts.select }} <span> </span>
+                <span class="font-weight-bold">{{ opts.data.user }} </span>
+                <span> {{ opts.data.message }} </span>
+                <span> {{ new Date() | moment("h:mm a") }} </span>
               </p>
             </div>
           </div>
-          <div v-else>
+          <!-- <div v-else>
             {{ selected.user }}: <span> {{ selected.message }}</span>
             <span> {{ new Date() | moment("h:mm a") }} </span>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="card-footer">
         <form @submit.prevent="sendMessage">
-          <section>
+          <!-- <section>
             <h3>Is the Guess correct?</h3>
             <input type="radio" v-model="options" name="options" value="Yes" />
             Yes
@@ -27,7 +28,17 @@
             No
             <br />
             <button type="submit" class="btn btn-success">Send</button>
-          </section>
+          </section> -->
+          <h3>Is the Guess correct?</h3>
+          <select v-model="selected">
+            <option disabled value="">Please select one</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+          <br />
+          <button type="submit" :disabled="clickable" class="btn btn-success">
+            Send
+          </button>
         </form>
       </div>
     </div>
@@ -37,7 +48,6 @@
 <script>
 import getSocket from "../../helpers/socket";
 import VueJwtDecode from "vue-jwt-decode";
-
 
 export default {
   name: "Chat",
@@ -56,6 +66,20 @@ export default {
     console.log(this.options, "state options");
     this.getUserDetails();
   },
+  computed: {
+    getMessage() {
+      return this.$store.getters.MESSAGE;
+    },
+    clickable() {
+      if (!this.options.length || this.options.length === 0) {
+        alert(
+          `Hey ${this.user.firstname}, allow the player 2 to make a guess before proceeding to confirm!!`
+        );
+        return true;
+      }
+      return false;
+    }
+  },
   methods: {
     getUserDetails() {
       let token = localStorage.getItem("user");
@@ -63,14 +87,13 @@ export default {
       console.log(decoded, "-----------");
       this.user = decoded;
     },
-
     sendMessage(e) {
       const socket = getSocket();
       e.preventDefault();
       console.log(
         {
           options: this.options,
-          user: this.user,
+          // user: this.user,
           adminMessage: this.adminMessage
         },
         "options"
@@ -81,19 +104,24 @@ export default {
       });
       socket.emit("SEND_MESSAGE", {
         user: this.user.firstname,
-        select: this.options,
+        message: this.selected,
         adminMessage: this.adminMessage
       });
-      this.options = "";
+      this.selected = "";
     }
   },
   mounted() {
     const socket = getSocket();
     socket.on("MESSAGE", data => {
-      console.log(data, data.room, "-----------jjjj1313");
-      socket.emit("join", data.room);
-      // localStorage.setItem("roomToJoin", data.room);
+      console.log(
+        data,
+        "222 on admin-side",
+        [...this.options, data],
+        this.options.length,
+        this.options
+      );
       this.options = [...this.options, data];
+      console.log(this.options, "check options array");
     });
   }
 };
