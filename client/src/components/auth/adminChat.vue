@@ -12,23 +12,10 @@
               </p>
             </div>
           </div>
-          <!-- <div v-else>
-            {{ selected.user }}: <span> {{ selected.message }}</span>
-            <span> {{ new Date() | moment("h:mm a") }} </span>
-          </div> -->
         </div>
       </div>
       <div class="card-footer">
         <form @submit.prevent="sendMessage">
-          <!-- <section>
-            <h3>Is the Guess correct?</h3>
-            <input type="radio" v-model="options" name="options" value="Yes" />
-            Yes
-            <input type="radio" v-model="options" name="options" value="No" />
-            No
-            <br />
-            <button type="submit" class="btn btn-success">Send</button>
-          </section> -->
           <h3>Is the Guess correct?</h3>
           <select v-model="selected">
             <option disabled value="">Please select one</option>
@@ -63,7 +50,6 @@ export default {
   },
   components: {},
   created() {
-    console.log(this.options, "state options");
     this.getUserDetails();
   },
   computed: {
@@ -90,14 +76,6 @@ export default {
     sendMessage(e) {
       const socket = getSocket();
       e.preventDefault();
-      console.log(
-        {
-          options: this.options,
-          // user: this.user,
-          adminMessage: this.adminMessage
-        },
-        "options"
-      );
       this.$store.dispatch("SET_MESSAGE", {
         options: this.options,
         adminMessage: this.adminMessage
@@ -113,13 +91,6 @@ export default {
   mounted() {
     const socket = getSocket();
     socket.on("MESSAGE", data => {
-      console.log(
-        data,
-        "222 on admin-side",
-        [...this.options, data],
-        this.options.length,
-        this.options
-      );
       this.options = [...this.options, data];
       console.log(this.options, "check options array");
     });

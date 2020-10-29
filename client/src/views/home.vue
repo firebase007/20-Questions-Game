@@ -48,8 +48,6 @@
 </template>
 <script>
 import VueJwtDecode from "vue-jwt-decode";
-// import getSocket from "../helpers/socket";
-// const socket = getSocket();
 
 export default {
   data() {
@@ -73,7 +71,6 @@ export default {
       console.log(this.user.email, this.submit.guess);
       this.$store.dispatch("SET_GUESS", this.submit.guess);
       this.$router.push("/chat/player1");
-      // socket.emit("create", "room1this");
     },
     logUserOut() {
       localStorage.removeItem("user");

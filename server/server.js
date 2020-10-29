@@ -61,22 +61,7 @@ io.use(async (socket, next) => {
 
 	console.log(`Socket session for user: ${socket.user.firstname} with id: ${socket.id} now connected.`)
 
-	// socket.join(socket.id)
-
 	socket.on('join', (user) => {
-		// console.log(socket.id, 'room-server-connection')
-		// socket.join(socket.id)
-		// io.sockets.in(data).emit('MESSAGE', data)
-		// console.log(socket, socket.user.firstname, 'ppppppppppppp')
-		// store the username in the socket session for this client
-		// socket.user.firstname = user
-		// store the room name in the socket session for this client
-		// add the client's username to the global list
-		// users[user] = user
-		// users.push(socket.user.firstname)
-		// console.log(users, 'users in room')
-
-		// send client to room 
 		socket.join('questions')
 
 		socket.broadcast.to('questions').emit('MESSAGE', 'SERVER', `${user} has connected to this room`)
@@ -88,11 +73,6 @@ io.use(async (socket, next) => {
 		io.emit('MESSAGE', { data, room: socket.id, id: userId })
 		// io.sockets.in(socket.id).emit('MESSAGE', data)
 	})
-
-	// socket.on('connected', (user) => {
-	// 	users[userId] = user
-	// 	io.emit('users', users)
-	// })
 
 	socket.on('disconnect', () => {
 		console.log('user disconnected')

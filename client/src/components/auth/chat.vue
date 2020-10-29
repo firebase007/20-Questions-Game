@@ -65,8 +65,6 @@ export default {
     initializeConvo
   },
   created() {
-    console.log(this.message, "message00000000");
-    console.log(this.messages, "room");
     this.getUserDetails();
     this.messages = this.$store.getters.MESSAGE;
   },
@@ -93,7 +91,6 @@ export default {
         messages: this.messages,
         adminMessage: this.adminMessage
       });
-      console.log(this.messages, "message-button-click");
       socket.emit("SEND_MESSAGE", {
         user: this.user.firstname,
         message: this.message,
@@ -107,13 +104,6 @@ export default {
   mounted() {
     const socket = getSocket();
     socket.on("MESSAGE", data => {
-      console.log(
-        data,
-        "222 on chat side-player 2",
-        [...this.messages, data],
-        this.messages.length,
-        this.messages
-      );
       this.messages = [...this.messages, data];
     });
   },
