@@ -38,6 +38,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
-.env
 
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
 

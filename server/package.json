@@ -7,7 +7,8 @@
     "create-dev-tables": "babel-node ./app/db/dbConnection createUserTable",
     "drop-dev-tables": "babel-node ./app/db/dbConnection dropUserTable",
     "start": "nodemon --watch . --exec babel-node -- server",
-    "setup": "npm-run-all -p start create-dev-tables",
+    "prod": "babel-node server.js",
+    "setup": "npm-run-all -p prod create-dev-tables",
     "revamp": "npm-run-all -p start drop-dev-tables"
   },
   "keywords": [
@@ -45,5 +46,8 @@
     "npm-run-all": "^4.1.5",
     "pg": "^8.4.1",
     "socket.io": "^2.3.0"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
