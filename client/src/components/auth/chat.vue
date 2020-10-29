@@ -9,8 +9,12 @@
 
           <div class="messages" v-for="msg in messages" :key="msg.message">
             <p>
-              <span class="font-weight-bold">{{ msg.data.user }}: </span
-              >{{ msg.data.message }} :
+              <span class="font-weight-bold">{{ msg.data.user }}: </span>
+              <span v-if="msg.data.message === 'Yes'">
+                Hey, the game has ended as you have made the correct
+                guess...!!!CONGRATULATIONS!!!
+              </span>
+              <span v-else> {{ msg.data.message }} : </span>
               <span> {{ new Date() | moment("h:mm a") }} </span>
             </p>
           </div>
@@ -116,12 +120,25 @@ export default {
   computed: {
     clickable() {
       // if something
+      console.log(this.messages, "messages");
       if (this.countdown === 0) {
         alert(
-          `Hey ${this.user.firstname}, the game has ended and you have not made the correct guess!!`
+          `Hey ${this.user.firstname}, the game has ended and you have not made the correct guess!!!`
         );
         return true;
       }
+      if (this.messages && this.messages.length) {
+        // for (let msg in this.messages) {
+        //   console.log(msg, this.messages, "olololoil");
+        // if (msg.data.message === "Yes") {
+        //   alert(
+        //     `Hey ${this.user.firstname}, the game has ended as you have made the correct guess...!!!CONGRATULATIONS!!!`
+        //   );
+        //   return true;
+        // }
+        // }
+      }
+
       return false;
     }
   }
