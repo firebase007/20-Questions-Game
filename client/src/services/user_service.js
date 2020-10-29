@@ -1,3 +1,5 @@
+//unused utitlity functions
+
 import authHeader from "../helpers/auth-header";
 
 function login(email, password) {

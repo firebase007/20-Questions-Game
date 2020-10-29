@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/home.vue";
 import Chat from "../views/chat.vue";
 import ChatAdmin from "../views/chatAdmin.vue";
+import Login from "../views/login.vue";
+import Register from "../views/register.vue";
 // import getSocket from '../helpers/socket';
 
 Vue.use(VueRouter);
@@ -19,44 +21,41 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("../views/login.vue"),
-
+    component: Login
   },
   {
     path: "/register",
     name: "register",
-    component: () => import("../views/register.vue")
+    component: Register
   },
   {
     path: "/chat/player1",
     name: "chatAdmin",
     component: ChatAdmin,
     meta: {
-        requiresAuth: true
-      }
+      requiresAuth: true
+    }
   },
   {
     path: "/chat",
     name: "chat",
     component: Chat,
     meta: {
-        requiresAuth: true
-      },
-    
+      requiresAuth: true
+    }
   }
 ];
 
 const router = new VueRouter({
   mode: "history",
-//base: process.env.VUE_APP_API_ROOT,
+  //base: process.env.VUE_APP_API_ROOT,
   routes
 });
 
 // const socket = getSocket()
 router.beforeEach((to, from, next) => {
-
   if (to.name === from.name) {
-    return next()
+    return next();
   }
   // if (socket.io.readyState === 'open') {
   //   if (to.name) {
@@ -64,7 +63,7 @@ router.beforeEach((to, from, next) => {
   //     socket.emit('join', to.name)
   //   }
   // }
-  next()
+  next();
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem("user") == null) {
       next({
@@ -74,8 +73,7 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    next()
-  
+    next();
   }
 });
 

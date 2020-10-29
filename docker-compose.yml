@@ -4,7 +4,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    command: sh -c "npm run serve"
+    command: sh -c "npm run build"
     ports:
       - 8000:3000
     working_dir: /home/app/client
@@ -32,7 +32,6 @@ services:
        - POSTGRES_USER=user
        - POSTGRES_DB=postgresdb
        - POSTGRES_PASSWORD=password
-       - POSTGRES_HOST=
     volumes:
        - ./db/data/postgres:/var/lib/postgresql/data  
     ports:
