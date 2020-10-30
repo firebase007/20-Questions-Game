@@ -46,3 +46,6 @@ client/
 server/
 db
 
+private.key
+
+public.key

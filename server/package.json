@@ -6,10 +6,10 @@
   "scripts": {
     "create-dev-tables": "babel-node ./app/db/dbConnection createUserTable",
     "drop-dev-tables": "babel-node ./app/db/dbConnection dropUserTable",
-    "start": "nodemon --watch . --exec babel-node -- server",
-    "prod": "babel-node server.js",
-    "setup": "npm-run-all -p prod create-dev-tables",
-    "revamp": "npm-run-all -p start drop-dev-tables"
+    "dev": "nodemon --watch . --exec babel-node -- server",
+    "start": "babel-node server.js",
+    "setup": "npm-run-all -p dev create-dev-tables",
+    "revamp": "npm-run-all -p dev drop-dev-tables"
   },
   "keywords": [
     "Node",
@@ -48,6 +48,7 @@
     "socket.io": "^2.3.0"
   },
   "engines": {
-    "node": "10.x"
+    "node": "13.7.0",
+    "npm": "6.13.6"
   }
 }

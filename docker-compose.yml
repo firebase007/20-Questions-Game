@@ -4,7 +4,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    command: sh -c "npm run build"
+    command: sh -c "npm run serve"
     ports:
       - 8000:3000
     working_dir: /app
@@ -26,12 +26,14 @@ services:
       - /app/node_modules # Inside the container, don't try to override this folder, just leave as is
     depends_on:
       - db
+    environment:
+      PG_URL: postgres://user:pass@postgres:5432/db
   db:
     image: postgres
     environment:
        - POSTGRES_USER=user
-       - POSTGRES_DB=postgresdb
-       - POSTGRES_PASSWORD=password
+       - POSTGRES_DB=db
+       - POSTGRES_PASSWORD=pass
     volumes:
        - ./db/data/postgres:/var/lib/postgresql/data  
     ports:
